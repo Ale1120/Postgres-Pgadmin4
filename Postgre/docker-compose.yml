@@ -1,0 +1,24 @@
+version: '3'
+services:
+   postgresdb:
+      build: ./
+      environment:
+         POSTGRES_PASSWORD: 12345678
+         POSTGRES_USER: postgres
+         POSTGRES_DB: postgres
+      volumes:
+         - postgresVolume:/var/lib/postgresql/9.6/main/data
+      ports:
+        - "5434:5432"
+      networks:
+         postgresNetwork:
+            aliases:
+               - postgresdb
+networks:
+  #webnet:
+  postgresNetwork:
+    driver: bridge
+volumes:
+    postgresVolume:
+
+
