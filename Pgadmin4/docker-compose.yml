@@ -1,9 +1,14 @@
-web:
-  build: .
-  ports:
-  - '5050:80'
-  environment:
-  - 'PGADMIN_DEFAULT_EMAIL=alejandro@ezgmz.com'
-  - 'PGADMIN_DEFAULT_PASSWORD=Ilm123'
-  
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+    - '5050:80'
+    environment:
+    - 'PGADMIN_DEFAULT_EMAIL=alejandro@ezgmz.com'
+    - 'PGADMIN_DEFAULT_PASSWORD=Ilm123'
 
+networks:
+  default:
+    external:
+      name: postgre_postgresNetwork
