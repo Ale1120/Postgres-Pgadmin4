@@ -5,9 +5,27 @@ services:
       environment:
          POSTGRES_PASSWORD: 12345678
          POSTGRES_USER: postgres
-         POSTGRES_DB: postgres
+         POSTGRES_DB: db_ezgmz
       volumes:
          - postgresVolume:/var/lib/postgresql/9.6/main/data
+         - ./base/000_sys_datadimension.sql:/docker-entrypoint-initdb.d/000_sys_datadimension.sql
+         - ./base/001_cli_common.sql:/docker-entrypoint-initdb.d/001_cli_common.sql
+         - ./base/005_lns_03_base_collectives.sql:/docker-entrypoint-initdb.d/005_lns_03_base_collectives.sql
+         - ./base/005_lns_03_base_collectives_functions.sql:/docker-entrypoint-initdb.d/005_lns_03_base_collectives_functions.sql
+         - ./base/005_lns_03_base_collectives_data.sql:/docker-entrypoint-initdb.d/005_lns_03_base_collectives_data.sql
+         - ./base/002_lns_00_get.sql:/docker-entrypoint-initdb.d/002_lns_00_get.sql
+         - ./base/002_lns_00_get_functions.sql:/docker-entrypoint-initdb.d/002_lns_00_get_functions.sql
+         - ./base/002_lns_00_get_data.sql:/docker-entrypoint-initdb.d/002_lns_00_get_data.sql
+         - ./base/003_lns_01_store.sql:/docker-entrypoint-initdb.d/003_lns_01_store.sql
+         - ./base/004_lns_02_translate.sql:/docker-entrypoint-initdb.d/004_lns_02_translate.sql
+         - ./base/004_lns_02_translate_functions.sql:/docker-entrypoint-initdb.d/004_lns_02_translate_functions.sql
+         - ./base/006_lns_04_base_market_autocreate_tables.sql:/docker-entrypoint-initdb.d/006_lns_04_base_market_autocreate_tables.sql
+         - ./base/007_lns_05_base_market_tables.sql:/docker-entrypoint-initdb.d/007_lns_05_base_market_tables.sql
+         - ./base/008_lns_06_output_market_autocreate_tables.sql:/docker-entrypoint-initdb.d/008_lns_06_output_market_autocreate_tables.sql
+         - ./base/009_lns_07_output_market_tables.sql:/docker-entrypoint-initdb.d/009_lns_07_output_market_tables.sql
+         - ./base/010_lns_08_output_mapping_tables.sql:/docker-entrypoint-initdb.d/010_lns_08_output_mapping_tables.sql
+         - ./base/011_lns_09_output_clean_tables.sql:/docker-entrypoint-initdb.d/011_lns_09_output_clean_tables.sql
+         - ./base/012_lns_10_output_datapush_tables.sql:/docker-entrypoint-initdb.d/012_lns_10_output_datapush_tables.sql
       ports:
         - "5434:5432"
       networks:
@@ -20,5 +38,4 @@ networks:
     driver: bridge
 volumes:
     postgresVolume:
-
-
+    base:
