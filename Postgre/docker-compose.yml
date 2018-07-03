@@ -1,14 +1,24 @@
 version: '3'
 services:
-  web:
-    build: .
-    ports:
-    - '5050:80'
-    environment:
-    - 'PGADMIN_DEFAULT_EMAIL=alejandro@ezgmz.com'
-    - 'PGADMIN_DEFAULT_PASSWORD=Ilm123'
-
+   postgresdb:
+      build: ./
+      environment:
+         POSTGRES_PASSWORD: 12345678
+         POSTGRES_USER: postgres
+         POSTGRES_DB: postgres
+      volumes:
+         - postgresVolume:/var/lib/postgresql/9.6/main/data
+      ports:
+        - "5434:5432"
+      networks:
+         postgresNetwork:
+            aliases:
+               - postgresdb
 networks:
-  default:
-    external:
-      name: postgre_postgresNetwork
+  #webnet:
+  postgresNetwork:
+    driver: bridge
+volumes:
+    postgresVolume:
+
+
